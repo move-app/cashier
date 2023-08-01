@@ -1,0 +1,26 @@
+div.container{
+    display: flex;
+    justify-content: center;
+}
+
+div.container details.form {
+    text-align: center;
+}
+
+table {
+    border: 1px solid #000;
+}
+
+td {
+    border-top: 1px solid #000;    
+}
+
+td, th {
+    text-align: center;
+    padding: 5px 10px;    
+}
+
+td input {
+    width: 50px;
+    text-align: center;
+}

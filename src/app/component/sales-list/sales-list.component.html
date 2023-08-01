@@ -1,0 +1,19 @@
+<div class="container">
+    <div>
+        <h3>Total Venda: R${{totalCashierDay}}</h3>
+
+        <div *ngFor="let sale of salesList" class="saleCard">
+            <span class="title">Total: R${{sumTotalCashier(sale)}}</span>
+            <span class="title">Data e Hora: {{formatDate(sale[0].idDate)}}</span>
+
+            <div *ngFor="let s of sale">
+                <span class="info">{{getProductName(s.product_id)}}</span>
+                <span class="info"> x{{s.amount}}</span>
+                <span class="info"> = R${{s.partial_value}}</span>
+            </div>
+
+            <button (click)="deleteSales(sale)">Excluir</button>
+        </div>
+
+    </div>
+</div>
