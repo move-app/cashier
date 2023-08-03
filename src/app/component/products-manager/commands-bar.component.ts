@@ -25,8 +25,9 @@ export class CommandsBarComponent {
     if (!prod.name || !prod.price)
       return;
 
-    const values = getProducts();    
-    if (!values.find(x => x.id === prod.id))
+    prod.id = getHighestIndex() + 1;
+    const values = getProducts();
+    if (!values.find(x => x.name === prod.name))
       addAndSaveProduct(prod);
   }
 
