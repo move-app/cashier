@@ -20,7 +20,7 @@
                         </option>
                     </select>
                 </td>
-                <td><input type="number" (change)="recalculateTotalCashier()" [(ngModel)]="cash.amount"/></td>
+                <td><input type="number" (change)="recalculateTotalCashier()" [(ngModel)]="cash.amount" min="0"/></td>
                 <td><input type="number" disabled [value]="cash.partial_value"/></td>
             </tr>
         </table>

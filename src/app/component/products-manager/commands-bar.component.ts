@@ -19,7 +19,8 @@ export class CommandsBarComponent {
   addProduct(){
     if (this.newProduct.name && this.newProduct.price > 0)
     {
-      const idx = getHighestIndex() + 1;
+      const highestIndex = getHighestIndex();
+      const idx = highestIndex + 1;
       this.newProduct.id = idx;
       addAndSaveProduct(this.newProduct);
       location.reload();

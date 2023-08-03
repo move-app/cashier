@@ -11,8 +11,9 @@ export const getProducts = () => {
 }
 
 export const getHighestIndex = () => {
-    const products = getProducts();
-    return Math.max(...products.map((x: product) => x.id))   
+    const products = getProducts();    
+    const maxIndex = Math.max(...products.map((x: product) => x.id));
+    return maxIndex !== -Infinity ? maxIndex : 0;
 }
 
 export const addAndSaveProduct = (product: product) => {

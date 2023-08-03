@@ -6,12 +6,10 @@
             <tr>
                 <th>Descrição</th>
                 <th>Valor</th>
-                <!-- <th>Estoque inicial</th> -->
             </tr>
             <tr *ngFor="let prod of products">
                 <td>{{prod.name}}</td>
                 <td>{{formatMoney(prod.price)}}</td>
-                <!-- <td>{{prod.supply}}</td> -->
                 <td><button (click)="deleteProduct(prod.id)">-</button></td>
             </tr>
         </table>
@@ -22,8 +20,7 @@
             <summary>Adicionar Produto</summary>
 
             <label>Descrição: <input type="text" [(ngModel)]="newProduct.name" /></label>
-            <label>Preço unitário: <input type="number" step="0.01" [(ngModel)]="newProduct.price"/></label>
-            <!-- <label>Estoque inicial: <input type="number" [(ngModel)]="newProduct.supply"/></label> -->
+            <label>Preço unitário: <input type="number" step="0.01" [(ngModel)]="newProduct.price" min="0"/></label>
             <button (click)="addProduct()">Adicionar</button>
         </details>
     </details>
