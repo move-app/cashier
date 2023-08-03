@@ -27,3 +27,11 @@ label {
     display: block;
     margin: 10px;
 }
+
+input {
+    text-align: center;
+}
+
+input.inputNumber {
+    width: 70px;
+}

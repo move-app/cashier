@@ -37,7 +37,23 @@ export class SalesListComponent {
       const hour = `${cDate.getHours().toString().padStart(2, '0')}`;
       const minute = `${cDate.getMinutes().toString().padStart(2, '0')}`;
       
-      const fDate = `${day}/${month}/${year} - ${hour}:${minute}`;
+      const fDate = `${day}/${month}/${year}`;
+      result = fDate;
+      
+      return result;
+  }
+
+  formatHour(date: string){  
+      let result = "";
+  
+      const cDate = new Date(date);
+      const day = `${cDate.getDate().toString().padStart(2, '0')}`;
+      const month = `${(cDate.getMonth() + 1).toString().padStart(2, '0')}`;
+      const year = `${cDate.getFullYear().toString()}`;
+      const hour = `${cDate.getHours().toString().padStart(2, '0')}`;
+      const minute = `${cDate.getMinutes().toString().padStart(2, '0')}`;
+      
+      const fDate = `${hour}:${minute}`;
       result = fDate;
       
       return result;
@@ -49,6 +65,10 @@ export class SalesListComponent {
 
   getProductValue(product_id: number){
     return this.products.find(x => x.id === Number(product_id))?.price;
+  }
+
+  getFormatedProductValue(product_id: number){
+    return `${this.products.find(x => x.id === Number(product_id))?.price.toFixed(2)}`;
   }
 
   sumTotalCashier(sales: sales[]){

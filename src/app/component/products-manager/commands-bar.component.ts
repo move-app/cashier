@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { addAndSaveProduct, deleteAndSaveProduct, getHighestIndex, getProducts } from 'src/app/helpers/products';
+import { addAndSaveProduct, deleteAndSaveProduct, getHighestIndex, getProducts, saveProducts } from 'src/app/helpers/products';
 import { emptyProduct, product } from 'src/app/interfaces/product';
 
 
@@ -10,23 +10,24 @@ import { emptyProduct, product } from 'src/app/interfaces/product';
 })
 export class CommandsBarComponent {
   products: product[] = [];
-  newProduct: product = emptyProduct;
 
   constructor() {
     this.products = getProducts();
   }
 
-  addProduct(){
-    if (this.newProduct.name && this.newProduct.price > 0)
-    {
-      const highestIndex = getHighestIndex();
-      const idx = highestIndex + 1;
-      this.newProduct.id = idx;
-      addAndSaveProduct(this.newProduct);
-      location.reload();
-    }else {
-      alert("Insira valores válidos para adicionar um novo produto.")
-    }
+  addNewProduct(){
+    const newProduct = {...emptyProduct};
+    newProduct.id = getHighestIndex() + 1;
+    this.products.push(newProduct);
+  }
+
+  saveProduct(prod: product){
+    if (!prod.name || !prod.price)
+      return;
+
+    const values = getProducts();    
+    if (!values.find(x => x.id === prod.id))
+      addAndSaveProduct(prod);
   }
 
   deleteProduct(id: number){
