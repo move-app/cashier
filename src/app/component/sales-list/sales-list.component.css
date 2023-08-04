@@ -1,5 +1,5 @@
 div.saleCard {
-    border: 1px solid #000;
+    
     padding: 5px;
 }
 
@@ -10,18 +10,6 @@ div.saleCard span.title {
 
 div.saleCard div {
     margin: 5px;
-}
-
-
-div.saleCard table {
-    /* text-align: center; */
-    border: 1px solid black;
-    margin: 10px;
-}
-
-div.saleCard table td {
-    border-top: 1px solid black;
-    padding: 5px 10px;
 }
 
 div.saleCard button {

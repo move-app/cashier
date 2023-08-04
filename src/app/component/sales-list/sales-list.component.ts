@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { getProducts } from 'src/app/helpers/products';
 import { deleteAndSaveSales, getGroupedSalesIds, getSales } from 'src/app/helpers/sale';
 import { product } from 'src/app/interfaces/product';
 import { sales } from 'src/app/interfaces/sales';
+import { ModalReceiptComponent } from '../modal-receipt/modal-receipt.component';
 
+
+ 
 @Component({
   selector: 'app-sales-list',
   templateUrl: './sales-list.component.html',
@@ -14,7 +18,7 @@ export class SalesListComponent {
   products: product[] = [];
   totalCashierDay = "";
   
-  constructor() {
+  constructor(public dialog: MatDialog) {
     const allSales = getSales();
     const aux = getGroupedSalesIds();
     
@@ -43,32 +47,8 @@ export class SalesListComponent {
       return result;
   }
 
-  formatHour(date: string){  
-      let result = "";
-  
-      const cDate = new Date(date);
-      const day = `${cDate.getDate().toString().padStart(2, '0')}`;
-      const month = `${(cDate.getMonth() + 1).toString().padStart(2, '0')}`;
-      const year = `${cDate.getFullYear().toString()}`;
-      const hour = `${cDate.getHours().toString().padStart(2, '0')}`;
-      const minute = `${cDate.getMinutes().toString().padStart(2, '0')}`;
-      
-      const fDate = `${hour}:${minute}`;
-      result = fDate;
-      
-      return result;
-  }
-
-  getProductName(product_id: number){
-    return this.products.find(x => x.id === Number(product_id))?.name;
-  }
-
   getProductValue(product_id: number){
     return this.products.find(x => x.id === Number(product_id))?.price;
-  }
-
-  getFormatedProductValue(product_id: number){
-    return `${this.products.find(x => x.id === Number(product_id))?.price.toFixed(2)}`;
   }
 
   sumTotalCashier(sales: sales[]){
@@ -87,6 +67,10 @@ export class SalesListComponent {
       deleteAndSaveSales(sale);
 
     location.reload();
+  }
+
+  openDialog(sale: sales[]){    
+    let dialogRef = this.dialog.open(ModalReceiptComponent, {data: sale});
   }
 
 }

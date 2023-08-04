@@ -17,19 +17,40 @@ export class CommandsBarComponent {
 
   addNewProduct(){
     const newProduct = {...emptyProduct};
-    newProduct.id = getHighestIndex() + 1;
+
+    const cachedHighestIdx = getHighestIndex();
+    const memoryHighestIdx = Math.max(...this.products.map(x => x.id));
+    newProduct.id =  memoryHighestIdx > cachedHighestIdx ? memoryHighestIdx + 1 : cachedHighestIdx + 1;
     this.products.push(newProduct);
   }
 
   saveProduct(prod: product){
     if (!prod.name || !prod.price)
       return;
-
-    prod.id = getHighestIndex() + 1;
+    
     const values = getProducts();
-    if (!values.find(x => x.name === prod.name))
-      addAndSaveProduct(prod);
+    if (!values.find(x => x.name === prod.name && x.price === prod.price))
+    {
+      if (values.find(x => x.id === prod.id)){
+        deleteAndSaveProduct(values.find(x => x.id === prod.id)?.id ?? 0);
+        addAndSaveProduct(prod);
+      }        
+      else
+        addAndSaveProduct(prod);
+
+    }
   }
+  
+  formatCurrencyValue(prod: product){
+    prod.price = Math.trunc(prod.price*Math.pow(10, 2))/Math.pow(10, 2);
+  }
+
+  saveProductAndFormat(prod: product){
+      this.saveProduct(prod);
+      this.formatCurrencyValue(prod);
+  }
+
+
 
   deleteProduct(id: number){
     deleteAndSaveProduct(id);

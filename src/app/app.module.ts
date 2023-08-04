@@ -7,18 +7,24 @@ import { CommandsBarComponent } from './component/products-manager/commands-bar.
 import { FormsModule } from '@angular/forms';
 import { SalesManagerComponent } from './component/sales-manager/sales-manager.component';
 import { SalesListComponent } from './component/sales-list/sales-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalReceiptComponent } from './component/modal-receipt/modal-receipt.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     CommandsBarComponent,
     SalesManagerComponent,
-    SalesListComponent
+    SalesListComponent,
+    ModalReceiptComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

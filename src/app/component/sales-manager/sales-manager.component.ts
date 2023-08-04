@@ -21,6 +21,7 @@ export class SalesManagerComponent {
   includeProduct(){
     const sale = {...emptySale};
     this.cashierProducts.push(sale);
+    this.products = getProducts();
   }
 
   recalculateTotalCashier(){
@@ -39,13 +40,34 @@ export class SalesManagerComponent {
   }
 
   saveSale(){
-    const idxDate = new Date().toISOString();
-    for(let item of this.cashierProducts)
-      item.idDate = idxDate;
+    this.aggroupSameProducts();
 
-    addAndSaveSales(this.cashierProducts.filter(x => x.amount > 0));
+    addAndSaveSales(this.cashierProducts);
 
     alert("Venda registrada com sucesso!");
     location.reload();
+  }
+
+  aggroupSameProducts(){
+    const result: sales[] = []
+    const idxDate = new Date().toISOString();
+
+    for (let idx of Array.from(new Set(this.cashierProducts.map(x => x.product_id)))){
+      const productsInCashier = this.cashierProducts.filter(x => x.product_id === idx && x.amount > 0);
+      if (productsInCashier.length === 0)
+        continue;
+
+      const totalProdAmount = productsInCashier.map(x => x.amount).reduce((a,b) => a+b);
+
+      result.push({
+        idDate: idxDate,
+        product_id: idx,
+        amount: totalProdAmount,
+        partial_value: (totalProdAmount * (this.products.find(x => x.id === Number(idx))?.price ?? 0)).toFixed(2),
+      });
+
+    }
+
+    this.cashierProducts = result;
   }
 }
