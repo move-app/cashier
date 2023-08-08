@@ -5,6 +5,7 @@ import { deleteAndSaveSales, getGroupedSalesIds, getSales } from 'src/app/helper
 import { product } from 'src/app/interfaces/product';
 import { sales } from 'src/app/interfaces/sales';
 import { ModalReceiptComponent } from '../modal-receipt/modal-receipt.component';
+import { TesteComponent } from '../teste/teste.component';
 
 
  
@@ -70,7 +71,7 @@ export class SalesListComponent {
   }
 
   openDialog(sale: sales[]){    
-    let dialogRef = this.dialog.open(ModalReceiptComponent, {data: sale});
+    let dialogRef = this.dialog.open(TesteComponent, {data: {chave: sale}});
   }
 
 }
