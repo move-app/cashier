@@ -1,6 +1,12 @@
 div.saleCard {
-    
+    border: 1px solid black;
     padding: 5px;
+    margin: 5px;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
 }
 
 div.saleCard span.title {
@@ -13,6 +19,8 @@ div.saleCard div {
 }
 
 div.saleCard button {
-    margin: 10px;
+    margin: 5px;
 }
+
+h3 { margin: 10px; text-align: center;}
 
